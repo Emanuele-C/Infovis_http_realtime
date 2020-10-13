@@ -95,7 +95,7 @@ const initBarChart = function(targetID) {
                     .on('mouseover', function (d) {    
                         tooltip
                             .style('opacity', 1)
-                            .html("N° measurements: "+ d.value +"  <br/>Target: "+(d.domain || d.ip) + "<br/>Avarage RRT: "+ parseFloat(d.arrt.toFixed(2)));
+                            .html("N° measurements: "+ d.value +"  <br/>Target: "+(d.domain || d.ip) + "<br/>Avarage RT: "+ parseFloat(d.arrt.toFixed(2)));
                     })
                     .on('mouseout', function (d) {
                         tooltip
@@ -121,7 +121,7 @@ const initBarChart = function(targetID) {
                                          
                         tooltip
                             .style('opacity', 1)
-                            .html("N° measurements: "+ d.value +"<br/>Target: "+(d.domain || d.ip)+"<br/>Avarage RRT: " + parseFloat(d.arrt.toFixed(2)));
+                            .html("N° measurements: "+ d.value +"<br/>Target: "+(d.domain || d.ip)+"<br/>Avarage RT: " + parseFloat(d.arrt.toFixed(2)));
                 })
                     .on('mouseout', function (d) {
                          tooltip
@@ -168,14 +168,14 @@ const initBarChart = function(targetID) {
     return function (result) {
         const sourceIp = result.result[0].dst_addr;
         const rtime = result.result[0].rt;
-        let avarageRTT;
+        let avarageRT;
         if (sourceIp && !result.result[0].err && rtime ) {
          
             data[sourceIp] = data[sourceIp] || {ip: sourceIp, domain: "", value: 0, arrt:rtime};
             data[sourceIp].value++;
             if(data[sourceIp].value!=1){
-                avarageRTT = (data[sourceIp].arrt + rtime)/(data[sourceIp].value);
-                data[sourceIp].arrt = avarageRTT;  
+                avarageRT = (data[sourceIp].arrt + rtime)/(data[sourceIp].value);
+                data[sourceIp].arrt = avarageRT;  
             }   
         }
 
