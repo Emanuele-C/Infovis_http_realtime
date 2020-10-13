@@ -1,0 +1,58 @@
+body {
+   font-family: Arial;  
+}
+
+h1 {
+	
+   font-family: Arial; 
+   text-align: center;
+}
+h2 {
+	text-align:center;
+	font-size: 12px;
+	font-style: italic;
+	color: gray;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+#everything{
+	border:1px solid black;
+	width:1200px;
+	border-radius:10px;
+	padding:10px;
+	margin-top:10px;
+	margin-left:10px
+}
+#boxhttp{
+	float:left;
+	width:700px;
+	border:1px solid #C0C0C0;
+	margin-top:20px;
+	border-radius:10px;
+}
+#chart1{
+	margin:0 auto;
+}
+
+.bar{
+	fill:#41A317;
+}
+text.label{
+	fill:#4A4344;
+	color: #777777;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+
+#boxPie{
+	float:right;
+	border:1px solid #C0C0C0;
+	border-radius:10px;
+	width:470px;
+	margin-top:20px;
+
+}
+#chart2{
+	margin:0 auto;
+}

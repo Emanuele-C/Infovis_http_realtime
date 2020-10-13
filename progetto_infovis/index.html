@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="./lib/d3.v5.min.js" charset="utf-8"></script>
+    <script src="./lib/socket.io.js"></script>
+    <script src="./lib/axios.min.js"></script>
+    <script src="./barChart.js"></script>
+    <script src="./pieChart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="everything">
+    <h1 style=>HTTP real-time</h1>
+        <p>Il progetto prevede un'analisi dei dati HTTP.
+         L'obiettivo è quello di estrapolare e visualizzare su grafi le richieste http visibili da RIPE Atlas in real-time.</p>
+        <p> Riportando: </p>
+        <ul>
+            <li>Nel grafico a barre a sinistra i top 10 target in http in cui viene effettuata come miglioria anche un reverse DNS lookup e al passaggio del mouse vengono riportati anche i relativi avarage RTT.</li>
+            <li>Nel grafico a torta a destra una panoramica in percentuale delle versioni dei protocolli riscontrati al fine di comparare quantitativamente IPv4 e IPv6</li>            </li> 
+        </ul>
+    <div id="boxhttp">
+        <h2>Top 10 targets HTTP (con reverse DNS lookup)</h2>
+        <div id="chart1"></div>
+    </div>
+        <div id="boxPie">
+        <h2>Versioni di ip riscontrate</h2>
+        <div id="chart2"></div>
+    </div>
+    <div style="clear:both"></div>
+    <h2 style="font-size:13px"> Emanuele Candela | A.A.2019/2020</h2>
+</div>
+
+
+<script>
+    // Create a connection (it can be also http on port 80)
+    const socket = io("https://atlas-stream.ripe.net:443", {transports: ['websocket'], path: "/stream/socket.io"});
+    
+    socket.emit("atlas_subscribe", {stream_type: "result", type: "http"});
+
+    const onMessageBarChart = initBarChart("#chart1");
+    const onMessagePieChart = initPieChart("#chart2");
+   
+    socket.on("atlas_result", (result) => {
+        onMessageBarChart(result);
+        onMessagePieChart(result);
+      
+    });
+</script>
+</body>
+</html>
